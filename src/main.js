@@ -1,7 +1,9 @@
 'use strict';
 
-
 const mainFilter = document.querySelector(`.main__filter`);
+const boardTasks = document.querySelector(`.board__tasks`);
+
+let tasksNumber = 7;
 
 const getRandomInteger = (min, max) => Math.round(min - 0.5 + Math.random() * (max - min + 1));
 
@@ -31,9 +33,6 @@ renderFilterElement(`Favorites`, getRandomInteger(0, 10));
 renderFilterElement(`Repeating`, getRandomInteger(0, 5));
 renderFilterElement(`Tags`, getRandomInteger(5, 15));
 renderFilterElement(`Archive`, getRandomInteger(50, 150));
-
-const tasksNumber = 7;
-const boardTasks = document.querySelector(`.board__tasks`);
 
 const renderCardElement = (color, type = ``) => {
   const typeClass = type ? ` card--${type}` : ``;
