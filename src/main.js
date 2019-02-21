@@ -3,36 +3,34 @@
 const mainFilter = document.querySelector(`.main__filter`);
 const boardTasks = document.querySelector(`.board__tasks`);
 
+const FILTERS_CAPTIONS = [`All`, `Overdue`, `Today`, `Favorites`, `Repeating`, `Tags`, `Archive`];
+
+const taskAmount = 50;
 let tasksNumber = 7;
 
 const getRandomInteger = (min, max) => Math.round(min - 0.5 + Math.random() * (max - min + 1));
 
-const renderFilterElement = (caption, amount, isDisabled = false, isChecked = false) => {
-  const checkedAttribute = isChecked ? ` checked` : ``;
-  const disabledAttribute = isDisabled ? ` disabled` : ``;
+const createFilterElement = (caption, amount, disabled = false, checked = false) => {
   const idAttribute = `filter__${caption.toLowerCase()}`;
   const labelClassAttribute = `${idAttribute}-count`;
-  const filterElement = `
+  return `
   <input
     type="radio"
     id="${idAttribute}"
     class="filter__input visually-hidden"
     name="filter"
-    ${checkedAttribute}
-    ${disabledAttribute}
+    ${checked === true ? checked : ``}
+    ${disabled === true ? disabled : ``}
   />
   <label for="${idAttribute}" class="filter__label">
   ${caption.toUpperCase()} <span class="${labelClassAttribute}">${amount}</span></label>`;
-  mainFilter.insertAdjacentHTML(`beforeend`, filterElement);
 };
 
-renderFilterElement(`All`, getRandomInteger(10, 25), false, true);
-renderFilterElement(`Overdue`, getRandomInteger(0, 5), true);
-renderFilterElement(`Today`, getRandomInteger(0, 5), true);
-renderFilterElement(`Favorites`, getRandomInteger(0, 10));
-renderFilterElement(`Repeating`, getRandomInteger(0, 5));
-renderFilterElement(`Tags`, getRandomInteger(5, 15));
-renderFilterElement(`Archive`, getRandomInteger(50, 150));
+const renderFilters = () => {
+  FILTERS_CAPTIONS.forEach((filterElement) => {
+    mainFilter.insertAdjacentHTML(`beforeend`, createFilterElement(filterElement, getRandomInteger(0, taskAmount)));
+  });
+};
 
 const renderCardElement = (color, type = ``) => {
   const typeClass = type ? ` card--${type}` : ``;
@@ -326,3 +324,4 @@ const onMainFilterClick = () => {
 };
 
 mainFilter.addEventListener(`click`, onMainFilterClick);
+renderFilters();
