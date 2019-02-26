@@ -1,4 +1,8 @@
-export default (color, type = ``) => {
+import {render} from '../src/util.js';
+
+const boardTasks = document.querySelector(`.board__tasks`);
+
+const createCardElement = (color, type = ``) => {
   const typeClass = type ? ` card--${type}` : ``;
   return `<article class="card card--${color}${typeClass}">
     <form class="card__form" method="get">
@@ -273,3 +277,17 @@ export default (color, type = ``) => {
   </article>
     `;
 };
+
+const renderCards = (count) => {
+  let content = ``;
+
+  let i = 0;
+
+  while (i < count) {
+    content += createCardElement(`black`, `deadline`);
+    i++;
+  }
+  render(boardTasks, content);
+};
+
+export {renderCards};
