@@ -4,7 +4,7 @@ import {getRandomBoolean} from './utils.js';
 
 const TAGS_COUNT = 3;
 
- const Time = {
+const Time = {
   DAYS: 7,
   HOURS: 24,
   MINUTES: 60,
@@ -18,7 +18,7 @@ const titles = [
   `Пройти интенсив на соточку`
 ];
 
- const tags = new Set([
+const tags = new Set([
   `homework`,
   `theory`,
   `practice`,
@@ -29,7 +29,7 @@ const titles = [
   `ES6`
 ]);
 
- const colors = new Set([
+const colors = new Set([
   `black`,
   `yellow`,
   `blue`,
@@ -37,25 +37,24 @@ const titles = [
   `pink`
 ]);
 
- const repeatingDays = {
-  'mo': getRandomBoolean(),
-  'tu': getRandomBoolean(),
-  'we': getRandomBoolean(),
-  'th': getRandomBoolean(),
-  'fr': getRandomBoolean(),
-  'sa': getRandomBoolean(),
-  'su': getRandomBoolean(),
-};
-
-const getDataForCard = () => {
-  title: util.getRandomFrom(titles),
+const getDataForCard = () => ({
+  title: getRandomElement(titles),
   dueDate: Date.now() + 1 + Math.floor(Math.random() * Time.DAYS) * Time.HOURS * Time.MINUTES * Time.SECONDS * Time.MILLISECONDS,
-  tags: getRandomElement([...tags], TAGS_COUNT),
+  tags: getRandomElement(tags, TAGS_COUNT),
   picture: `//picsum.photos/100/100?r=${getRandomInteger()}`,
-  colors: getRandomElement([...colors]),
+  color: getRandomElement(colors),
+  repeatingDays: {
+    'mo': getRandomBoolean(),
+    'tu': getRandomBoolean(),
+    'we': getRandomBoolean(),
+    'th': getRandomBoolean(),
+    'fr': getRandomBoolean(),
+    'sa': getRandomBoolean(),
+    'su': getRandomBoolean(),
+  },
   isRepeat: getRandomBoolean(),
   isFavorite: getRandomBoolean(),
   isDone: getRandomBoolean()
-};
+});
 
 export {getDataForCard};

@@ -277,13 +277,13 @@ const createCardElement = (object) => {
     `;
 };
 
-const renderCards = (count, data) => {
+const renderCards = (count) => {
   let content = ``;
-
+  let cardsTemplate = [];
   let i = 0;
 
   while (i < count) {
-    content += createCardElement(data);
+    cardsTemplate.push(createCardElement(), i);
     i++;
   }
   render(boardTasks, content);
