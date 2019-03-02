@@ -1,9 +1,50 @@
-import {render} from '../src/util.js';
+const makeData = (data) => {
 
-const boardTasks = document.querySelector(`.board__tasks`);
+  const checkDeadline = (time) => {
+    const now = new Date();
+    return (time.dueDate > now) ? `` : `card--deadline`;
+  };
+
+  const getTimeDeadline = (time) => {
+    const date = new Date(time.dueDate);
+    const noon = (date.getHours() >= 12) ? `AM` : `PM`;
+
+    return date.getHours() + `:` + date.getMinutes() + ` ` + noon;
+  };
+
+  const getDateDeadline = (time) => {
+    const date = new Date(time.dueDate);
+    const months = [`January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December`];
+
+    return date.getDate() + ` ` + months[date.getMonth()];
+  };
+
+  const getRepeatingDays = (repeat) => {
+    let repeatDays = [];
+    for (let item in repeat.repeatingDays) {
+      if (repeat.repeatingDays.hasOwnProperty(item)) {
+        if (repeat.repeatingDays[item]) {
+          repeatDays.push(item);
+        }
+      }
+    }
+    return repeatDays;
+  };
+
+  return {
+    title: data.title,
+    color: data.colors,
+    picture: data.picture,
+    dueDate: checkDeadline(data),
+    cardDate: getDateDeadline(data),
+    cardTime: getTimeDeadline(data),
+    repeatDay: getRepeatingDays(data),
+    tags: data.tags
+  };
+};
 
 const createCardElement = (object) => {
-  return `<article class="card card--${object.color}${object.isRepeat ? `card--repeat` : ``} ${object.isEdit ? `card--edit` : ``}">
+  return `<article class="card card--${object.color}${object.checkDeadline}${object.repeatDay.length ? `card--repeat` : ``}" style="">
     <form class="card__form" method="get">
       <div class="card__inner">
         <div class="card__control">
@@ -49,6 +90,7 @@ const createCardElement = (object) => {
                     type="text"
                     placeholder="23 September"
                     name="date"
+                    value="${object.getDateDeadline}"
                   />
                 </label>
                 <label class="card__input-deadline-wrap">
@@ -57,6 +99,7 @@ const createCardElement = (object) => {
                     type="text"
                     placeholder="11:15 PM"
                     name="time"
+                    value="${object.timeDeadline}"
                   />
                 </label>
               </fieldset>
@@ -277,16 +320,15 @@ const createCardElement = (object) => {
     `;
 };
 
-const renderCards = (count) => {
+const renderCards = (count, getDataForCard) => {
   let content = ``;
-  let cardsTemplate = [];
   let i = 0;
 
   while (i < count) {
-    cardsTemplate.push(createCardElement(), i);
+    content += createCardElement(makeData(getDataForCard()));
     i++;
   }
-  render(boardTasks, content);
+  return content;
 };
 
 export {renderCards};

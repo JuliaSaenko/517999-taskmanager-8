@@ -1,6 +1,7 @@
-import {render} from '../src/util.js';
-import {getRandomInteger} from '../src/util.js';
-import {renderCards} from './make-card.js';
+import {render} from './util.js';
+import {getRandomIntegerFromInterval} from './util.js';
+import {renderCardsList} from './make-card.js';
+import {getDataForCard} from './data-for-card.js';
 
 const mainFilter = document.querySelector(`.main__filter`);
 
@@ -28,7 +29,7 @@ const renderFilters = (filters) => {
 
   render(mainFilter, content);
 
-  mainFilter.addEventListener(`change`, () => renderCards(getRandomInteger(1, 8)));
+  mainFilter.addEventListener(`change`, () => renderCardsList(getRandomIntegerFromInterval(1, 8), getDataForCard));
 };
 
 export {renderFilters};
