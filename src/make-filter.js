@@ -1,6 +1,6 @@
 import {render} from './util.js';
 import {getRandomIntegerFromInterval} from './util.js';
-import {renderCardsList} from './make-card.js';
+import {renderCardsList} from './main.js';
 import {getDataForCard} from './data-for-card.js';
 
 const mainFilter = document.querySelector(`.main__filter`);

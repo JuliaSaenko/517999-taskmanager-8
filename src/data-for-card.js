@@ -2,7 +2,16 @@ import {getRandomIntegerFromInterval} from './util.js';
 import {getRandomElement} from './util.js';
 import {getRandomBoolean} from './util.js';
 
-const TAGS_COUNT = 3;
+const getRandomTags = (count, tags) => {
+  const tagsArray = [];
+  const tagsArrayLength = tags.length < count ? tags.length : count;
+
+  for (let i = 0; i < tagsArrayLength; i++) {
+    tagsArray.push(tags[i]);
+  }
+
+  return tagsArray;
+};
 
 const titles = [
   `Изучить теорию`,
@@ -10,7 +19,7 @@ const titles = [
   `Пройти интенсив на соточку`
 ];
 
-const tags = [
+const tags = new Set([
   `homework`,
   `theory`,
   `practice`,
@@ -19,7 +28,7 @@ const tags = [
   `todo`,
   `JavaScript`,
   `ES6`
-];
+]);
 
 const colors = [
   `black`,
@@ -32,7 +41,7 @@ const colors = [
 const getDataForCard = () => ({
   title: getRandomElement(titles),
   dueDate: Date.now() + getRandomIntegerFromInterval(8, -7) * 24 * 60 * 60 * 1000,
-  tags: getRandomElement(tags, TAGS_COUNT),
+  tags: getRandomTags(getRandomIntegerFromInterval(0, 3), tags),
   picture: `//picsum.photos/100/100?r=${getRandomIntegerFromInterval()}`,
   color: getRandomElement(colors),
   repeatingDays: {

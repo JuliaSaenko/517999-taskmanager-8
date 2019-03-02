@@ -186,6 +186,7 @@ const createCardElement = (object) => {
             </div>
             <div class="card__hashtag">
             <div class="card__hashtag-list">
+            ${[...object.tags].map((it) => `
             <span class="card__hashtag-inner">
               <input
                 type="hidden"
@@ -194,12 +195,12 @@ const createCardElement = (object) => {
                 class="card__hashtag-hidden-input"
               />
               <button type="button" class="card__hashtag-name">
-                #repeat
+                #${it}
               </button>
               <button type="button" class="card__hashtag-delete">
                 delete
               </button>
-            </span>
+            </span>`).join(``)}
             <span class="card__hashtag-inner">
               <input
                 type="hidden"
@@ -238,7 +239,7 @@ const createCardElement = (object) => {
               name="img"
             />
             <img
-              src="img/add-photo.svg"
+              src="${object.picture}""
               alt="task picture"
               class="card__img"
             />

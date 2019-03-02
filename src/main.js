@@ -42,7 +42,7 @@ const FILTERS = [
   },
 ];
 
-const renderCardsList = (count) => {
+export const renderCardsList = (count) => {
   render(boardTasks, renderCards(count, getDataForCard));
 };
 
