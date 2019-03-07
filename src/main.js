@@ -42,9 +42,6 @@ const FILTERS = [
   },
 ];
 
-export const renderCardsList = (count) => {
-  render(boardTasks, renderCards(count, getDataForCard));
-};
 
 renderFilters(FILTERS);
-renderCardsList(tasksNumber, getDataForCard);
+render(boardTasks, renderCards(tasksNumber, getDataForCard));

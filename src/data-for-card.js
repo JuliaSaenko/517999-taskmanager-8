@@ -19,17 +19,6 @@ const titles = [
   `Пройти интенсив на соточку`
 ];
 
-const tags = new Set([
-  `homework`,
-  `theory`,
-  `practice`,
-  `intensive`,
-  `keks`,
-  `todo`,
-  `JavaScript`,
-  `ES6`
-]);
-
 const colors = [
   `black`,
   `yellow`,
@@ -41,7 +30,16 @@ const colors = [
 const getDataForCard = () => ({
   title: getRandomElement(titles),
   dueDate: Date.now() + getRandomIntegerFromInterval(8, -7) * 24 * 60 * 60 * 1000,
-  tags: getRandomTags(getRandomIntegerFromInterval(0, 3), tags),
+  tags: new Set(getRandomTags(getRandomIntegerFromInterval(0, 2), [
+    `homework`,
+    `theory`,
+    `practice`,
+    `intensive`,
+    `keks`,
+    `todo`,
+    `JavaScript`,
+    `ES6`
+  ])),
   picture: `//picsum.photos/100/100?r=${getRandomIntegerFromInterval()}`,
   color: getRandomElement(colors),
   repeatingDays: {
