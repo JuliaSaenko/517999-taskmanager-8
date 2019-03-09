@@ -1,42 +1,47 @@
+import {render} from './util.js';
 import {renderFilters} from './make-filter.js';
 import {renderCards} from './make-card.js';
-import {getRandomInteger} from './util.js';
+import {getDataForCard} from './data-for-card.js';
+import {getRandomIntegerFromInterval} from './util.js';
+
+const boardTasks = document.querySelector(`.board__tasks`);
 
 let tasksNumber = 7;
 
 const FILTERS = [
   {
     caption: `All`,
-    amount: getRandomInteger(10, 40),
+    amount: getRandomIntegerFromInterval(10, 40),
     checked: true,
   },
   {
     caption: `Overdue`,
-    amount: getRandomInteger(0, 5),
+    amount: getRandomIntegerFromInterval(0, 5),
     disabled: true,
   },
   {
     caption: `Today`,
-    amount: getRandomInteger(0, 5),
+    amount: getRandomIntegerFromInterval(0, 5),
     disabled: true,
   },
   {
     caption: `Favorites`,
-    amount: getRandomInteger(0, 10),
+    amount: getRandomIntegerFromInterval(0, 10),
   },
   {
     caption: `Repeating`,
-    amount: getRandomInteger(0, 7),
+    amount: getRandomIntegerFromInterval(0, 7),
   },
   {
     caption: `Tags`,
-    amount: getRandomInteger(3, 10),
+    amount: getRandomIntegerFromInterval(3, 10),
   },
   {
     caption: `Archive`,
-    amount: getRandomInteger(50, 150),
+    amount: getRandomIntegerFromInterval(50, 150),
   },
 ];
 
+
 renderFilters(FILTERS);
-renderCards(tasksNumber);
+render(boardTasks, renderCards(tasksNumber, getDataForCard));
