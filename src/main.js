@@ -1,8 +1,8 @@
-import {render} from './util.js';
 import {renderFilters} from './make-filter.js';
-import {renderCards} from './make-card.js';
 import {getDataForCard} from './data-for-card.js';
 import {getRandomIntegerFromInterval} from './util.js';
+import {Card} from "./card";
+import {EditCard} from "./edit-card.js";
 
 const boardTasks = document.querySelector(`.board__tasks`);
 
@@ -44,4 +44,38 @@ const FILTERS = [
 
 
 renderFilters(FILTERS);
-render(boardTasks, renderCards(tasksNumber, getDataForCard));
+
+const getMoreCards = (count) => {
+  let i = 0;
+  const fragment = document.createDocumentFragment();
+
+
+  while (count > i) {
+    const getDataForCards = getDataForCard();
+    const newCard = new Card(getDataForCards);
+    const editCard = new EditCard(getDataForCards);
+
+
+    newCard.onEdit = () => {
+      editCard.render();
+      boardTasks.replaceChild(editCard.element, newCard.element);
+      newCard.unRender();
+    };
+
+    editCard.onSubmit = () => {
+      newCard.render();
+      boardTasks.replaceChild(newCard.element, editCard.element);
+      editCard.unRender();
+    };
+
+    fragment.appendChild(newCard.render());
+    i++;
+  }
+
+  boardTasks.appendChild(fragment);
+
+};
+
+getMoreCards(tasksNumber);
+
+export {getMoreCards};

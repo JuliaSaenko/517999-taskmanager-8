@@ -1,10 +1,8 @@
 import {render} from './util.js';
 import {getRandomIntegerFromInterval} from './util.js';
-import {renderCards} from './make-card.js';
-import {getDataForCard} from './data-for-card.js';
+import {getMoreCards} from './main.js';
 
 const mainFilter = document.querySelector(`.main__filter`);
-const boardTasks = document.querySelector(`.board__tasks`);
 
 const createFilterElement = (filter) => {
   const lowerFilterName = filter.caption.toLowerCase();
@@ -30,7 +28,7 @@ const renderFilters = (filters) => {
 
   render(mainFilter, content);
 
-  mainFilter.addEventListener(`change`, () => render(boardTasks, renderCards(getRandomIntegerFromInterval(1, 8), getDataForCard)));
+  mainFilter.addEventListener(`change`, () => getMoreCards(getRandomIntegerFromInterval(1, 8)));
 };
 
 export {renderFilters};
