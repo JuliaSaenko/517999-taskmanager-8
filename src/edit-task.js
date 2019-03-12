@@ -1,6 +1,6 @@
 import {createElement, getDateDeadline, getTimeDeadline} from './util';
 
-class EditCard {
+class EditTask {
   constructor(data) {
     this._title = data.title;
     this._dueDate = data.dueDate;
@@ -10,11 +10,11 @@ class EditCard {
     this._color = data.color;
 
     this._element = null;
-    this._onSubmit = null;
+    this._onSubmit = this._onSubmitButtonClick.bind(this);
   }
 
   _isRepeated() {
-    return Object.values(this._repeatingDays).some((it) => it === 1);
+    return Object.values(this._repeatingDays).some((it) => it);
   }
 
   get template() {
@@ -147,11 +147,11 @@ class EditCard {
   }
 
   bind() {
-    this._element.querySelector(`.card__form`).addEventListener(`submit`, this._onSubmitButtonClick.bind(this));
+    this._element.querySelector(`.card__form`).addEventListener(`submit`, this._onSubmitButtonClick);
   }
 
   unbind() {
-    this._element.removeEventListener(`submit`, this._onSubmitButtonClick);
+    this._element.querySelector(`.card__form`).removeEventListener(`submit`, this._onSubmitButtonClick);
   }
 
   render() {
@@ -160,4 +160,4 @@ class EditCard {
     return this._element;
   }
 }
-export {EditCard};
+export {EditTask};
