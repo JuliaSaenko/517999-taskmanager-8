@@ -1,6 +1,9 @@
-import {renderFilters} from './render-filters.js';
+import {Filter} from './filter.js';
 import {FILTERS} from './data-for-filter.js';
 import {renderTasks, tasksData} from './render-tasks.js';
 
-renderFilters(FILTERS);
+
 renderTasks(tasksData);
+
+const filter = new Filter(FILTERS);
+filter.render();

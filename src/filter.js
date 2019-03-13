@@ -2,7 +2,7 @@ import {createElement} from './util';
 
 class Filter {
   constructor(data) {
-    this._caption = data.caption;
+    this._label = data.label;
     this._amount = data.amount;
     this._isChecked = data.checked;
   }
@@ -20,14 +20,14 @@ class Filter {
     return `
       <input
         type="radio"
-        id="filter__${this._caption.toLowerCase()}"
+        id="filter__${this._label}"
         class="filter__input visually-hidden"
         name="filter"
         ${this._amount ? `` : `disabled`}
         ${this._isChecked ? `checked` : ``}>
-      <label for="filter__${this._caption.toLowerCase()}" class="filter__label">
-        ${this._caption.toUpperCase()}
-        <span class="filter__${this._caption.toLowerCase()}-count">
+      <label for="filter__${this._label}" class="filter__label">
+        ${this._label}
+        <span class="filter__${this._label}-count">
           ${this._amount}
         </span>
       </label>`;

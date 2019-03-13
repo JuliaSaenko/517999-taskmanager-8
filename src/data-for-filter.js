@@ -2,34 +2,34 @@ import {getRandomIntegerFromInterval} from './util.js';
 
 const FILTERS = [
   {
-    caption: `All`,
+    label: `all`,
     amount: getRandomIntegerFromInterval(10, 40),
     checked: true,
   },
   {
-    caption: `Overdue`,
+    label: `overdue`,
     amount: getRandomIntegerFromInterval(0, 5),
     disabled: true,
   },
   {
-    caption: `Today`,
+    label: `today`,
     amount: getRandomIntegerFromInterval(0, 5),
     disabled: true,
   },
   {
-    caption: `Favorites`,
+    label: `favorites`,
     amount: getRandomIntegerFromInterval(0, 10),
   },
   {
-    caption: `Repeating`,
+    label: `repeating`,
     amount: getRandomIntegerFromInterval(0, 7),
   },
   {
-    caption: `Tags`,
+    label: `tags`,
     amount: getRandomIntegerFromInterval(3, 10),
   },
   {
-    caption: `Archive`,
+    label: `archive`,
     amount: getRandomIntegerFromInterval(50, 150),
   },
 ];
